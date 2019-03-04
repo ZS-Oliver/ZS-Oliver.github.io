@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[139 单词拆分]]></title>
+    <url>%2F2019%2F02%2F09%2F139%20%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86%2F</url>
+    <content type="text"><![CDATA[给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。说明：12拆分时可以重复使用字典中的单词。你可以假设字典中没有重复的单词。 示例1：123输入: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]输出: true解释: 返回 true 因为 &quot;leetcode&quot; 可以被拆分成 &quot;leet code&quot;。 示例2：1234输入: s = &quot;applepenapple&quot;, wordDict = [&quot;apple&quot;, &quot;pen&quot;]输出: true解释: 返回 true 因为 &quot;applepenapple&quot; 可以被拆分成 &quot;apple pen apple&quot;。 注意你可以重复使用字典中的单词。 示例3：12输入: s = &quot;catsandog&quot;, wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]输出: false 代码实现：1234567891011121314151617public boolean wordBreak(String s, List&lt;String&gt; wordDict) &#123; if(s.isEmpty() || wordDict.isEmpty())&#123; return false; &#125; boolean[] mark = new boolean[s.length() + 1]; mark[0] = true; for (int i = 1; i &lt;= s.length(); i++) &#123; for (int j = 0; j &lt; i; j++) &#123; if(mark[j] &amp;&amp; wordDict.contains(s.substring(j,i)))&#123; mark[i] = true; break; &#125; &#125; &#125; return mark[s.length()]; &#125; 思路：1234动态规划将一个字符串拆成两部分，若前半部分是可分的，后半部分存在于dict中，则整个字符串成立例如leetcode，若leet是可拆分的，code在dict中，则leetcode是可拆分的。]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[131 分割回文串]]></title>
+    <url>%2F2019%2F02%2F08%2F131%20%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2%2F</url>
+    <content type="text"><![CDATA[给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。返回 s 所有可能的分割方案。示例：123456输入: &quot;aab&quot;输出:[ [&quot;aa&quot;,&quot;b&quot;], [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;]] 代码实现：12345678910111213141516171819202122232425262728293031323334class Solution &#123; List&lt;List&lt;String&gt;&gt; results = new ArrayList&lt;&gt;(); public List&lt;List&lt;String&gt;&gt; partition(String s) &#123; if (s.isEmpty()) &#123; return results; &#125; find(s, 0, new ArrayList&lt;&gt;()); return results; &#125; private void find(String s, int index, List&lt;String&gt; list) &#123; if (index == s.length()) &#123; results.add(new ArrayList&lt;&gt;(list)); return; &#125; for (int i = index; i &lt; s.length(); i++) &#123; if (isPalindrome(s, index, i)) &#123; list.add(s.substring(index, i + 1)); find(s, i + 1, list); list.remove(list.size() - 1); &#125; &#125; &#125; private boolean isPalindrome(String s, int begin, int end) &#123; while (begin &lt; end &amp;&amp; s.charAt(begin) == s.charAt(end)) &#123; begin++; end--; &#125; return begin &gt;= end; &#125;&#125; 思路：1234567深搜先深搜到层3，将 s 分割为 “a”,”a”,”b”，并记录此分割方案 [“a”,”a”,”b”]回溯到层2， “a” 不动，判断 “ab” 不满足（即考虑 [“a”,”ab”] 方案）回溯到层1，判断”aa” 满足进入层2，判断 “b” 满足，此时记录此种方案 [“aa”,”b”]回溯到层1，”aa”的基础上加上 “b”，判断 “aab” 不满足层1 遍历结束，整个流程结束。]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>DFS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[125 验证回文串]]></title>
+    <url>%2F2019%2F02%2F07%2F125%20%E9%AA%8C%E8%AF%81%E5%9B%9E%E6%96%87%E4%B8%B2%2F</url>
+    <content type="text"><![CDATA[给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。说明：1本题中，我们将空字符串定义为有效的回文串 示例1：12输入: &quot;A man, a plan, a canal: Panama&quot;输出: true 示例2：12输入: &quot;race a car&quot;输出: false 代码实现：1234567891011121314151617181920212223public boolean isPalindrome(String s) &#123; if (s == null || s.length() == 0) &#123; return true; &#125; StringBuilder sb = new StringBuilder(); char[] chars = s.toCharArray(); for (int i = 0; i &lt; chars.length; i++) &#123; if ((chars[i] &gt;= &apos;a&apos; &amp;&amp; chars[i] &lt;= &apos;z&apos;) || (chars[i] &gt;= &apos;A&apos; &amp;&amp; chars[i] &lt;= &apos;Z&apos;) || (chars[i] &gt;= &apos;0&apos; &amp;&amp; chars[i] &lt;= &apos;9&apos;)) &#123; sb.append(chars[i]); &#125; &#125; chars = sb.toString().toCharArray(); for (int i = 0, j = chars.length - 1; i &lt;= chars.length / 2 - 1; i++, j--) &#123; if (Character.toUpperCase(chars[i]) != Character.toUpperCase(chars[j])) &#123; return false; &#125; &#125; return true; &#125; 思路：1从数组两端同时开始遍历，比较是否相等]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[887 鸡蛋掉落]]></title>
     <url>%2F2019%2F02%2F06%2F887%20%E9%B8%A1%E8%9B%8B%E6%8E%89%E8%90%BD%2F</url>
     <content type="text"><![CDATA[你将获得 K 个鸡蛋，并可以使用一栋从 1 到 N 共有 N 层楼的建筑。每个蛋的功能都是一样的，如果一个蛋碎了，你就不能再把它掉下去。 你知道存在楼层 F ，满足 0 &lt;= F &lt;= N 任何从高于 F 的楼层落下的鸡蛋都会碎，从 F 楼层或比它低的楼层落下的鸡蛋都不会破。 每次移动，你可以取一个鸡蛋（如果你有完整的鸡蛋）并把它从任一楼层 X 扔下（满足 1 &lt;= X &lt;= N）。 你的目标是确切地知道 F 的值是多少。 无论 F 的初始值如何，你确定 F 的值的最小移动次数是多少？ 示例1：1234567输入：K = 1, N = 2输出：2解释：鸡蛋从 1 楼掉落。如果它碎了，我们肯定知道 F = 0 。否则，鸡蛋从 2 楼掉落。如果它碎了，我们肯定知道 F = 1 。如果它没碎，那么我们肯定知道 F = 2 。因此，在最坏的情况下我们需要移动 2 次以确定 F 是多少。 示例2：12输入：K = 2, N = 6输出：3 示例3：12输入：K = 3, N = 14输出：4 提示：121 &lt;= K &lt;= 1001 &lt;= N &lt;= 10000 代码实现：12345678910111213141516171819202122232425262728public int superEggDrop(int K, int N) &#123; int[][] records = new int[K + 1][N + 1]; for (int i = 0; i &lt;= K; i++) &#123; records[i][0] = 0; records[i][1] = 1; &#125; for (int i = 0; i &lt;= N; i++) &#123; records[1][i] = i; &#125; for (int i = 2; i &lt;= K; i++) &#123; for (int j = 2; j &lt;= N; j++) &#123; records[i][j] = Integer.MAX_VALUE; for (int index = 1; index &lt;= j; index++) &#123; int res = Math.max(records[i - 1][index - 1], records[i][j - index]) + 1; if (res &lt; records[i][j]) &#123; records[i][j] = res; &#125; &#125; &#125; &#125; return records[K][N]; &#125; 思路：123456789动态规划当只有0层楼高时，dp[i][0] == 0当只有1层楼高时，dp[i][1] == 1当只有1个鸡蛋时，dp[1][i] == i若第一次从第x层开始尝试dp[k-1][x-1]为第一次尝试后鸡蛋摔碎的情况dp[k][n-x]为第一次尝试后鸡蛋没有摔碎的情况则 dp[k][n] = Math.max(dp[k-1][x-1],dp[k][n-x]) + 1]]></content>
@@ -53,8 +88,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>异或运算</tag>
         <tag>数组</tag>
+        <tag>异或运算</tag>
       </tags>
   </entry>
   <entry>
