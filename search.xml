@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[88 合并两个有序数组]]></title>
+    <url>%2F2019%2F02%2F05%2F88%20%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%2F</url>
+    <content type="text"><![CDATA[给定两个有序整数数组 nums1 和 nums2，将 nums2 合并到 nums1 中，使得 num1 成为一个有序数组。说明：12初始化 nums1 和 nums2 的元素数量分别为 m 和 n。你可以假设 nums1 有足够的空间（空间大小大于或等于 m + n）来保存 nums2 中的元素。 示例：12345输入:nums1 = [1,2,3,0,0,0], m = 3nums2 = [2,5,6], n = 3输出: [1,2,2,3,5,6] 代码实现：1234567891011121314151617181920public void merge(int[] nums1, int m, int[] nums2, int n) &#123; int length = m + n - 1; m--; n--; while (m &gt;= 0 &amp;&amp; n &gt;= 0) &#123; if (nums2[n] &gt; nums1[m]) &#123; nums1[length] = nums2[n]; n--; &#125; else &#123; nums1[length] = nums1[m]; m--; &#125; length--; &#125; while (n &gt;= 0) &#123; nums1[length] = nums2[n]; n--; length--; &#125; &#125; 思路：123合并后nums1数组的大小为m+n，则从后往前赋值，比较nums1和nums2末尾元素的大小，将大的赋值给nums1。当有数组的个数为0时，再查看nums2数组元素个数，如果有剩余，则赋值到nums1剩余部分。nums1不需查看，因为如果nums1有剩余，他的顺序是不需要改变的]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[240 搜索二维矩阵II]]></title>
+    <url>%2F2019%2F02%2F04%2F240%20%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5II%2F</url>
+    <content type="text"><![CDATA[m x n 矩阵 matrix 中的一个目标值 target。该矩阵具有以下特性：每行的元素从左到右升序排列。每列的元素从上到下升序排列。示例：12345678910111213现有矩阵 matrix 如下：[ [1, 4, 7, 11, 15], [2, 5, 8, 12, 19], [3, 6, 9, 16, 22], [10, 13, 14, 17, 24], [18, 21, 23, 26, 30]]给定 target = 5，返回 true。给定 target = 20，返回 false。 代码实现：1234567891011121314151617public boolean searchMatrix(int[][] matrix, int target) &#123; if (matrix.length == 0 || matrix[0].length == 0) &#123; return false; &#125; int j = matrix[0].length - 1; int i = 0; while (i &lt; matrix.length &amp;&amp; j &gt;= 0) &#123; if (matrix[i][j] == target) &#123; return true; &#125; else if (matrix[i][j] &gt; target) &#123; j--; &#125; else &#123; i++; &#125; &#125; return false; &#125; 思路：1将target与每行的最后一个值比较，若target大于最后一个值，则target在改行下面，直到target小于等于最后一个值，此时target要么在该行，要么不存在]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>二维数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[169 求众数]]></title>
+    <url>%2F2019%2F02%2F02%2F169%20%E6%B1%82%E4%BC%97%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[给定一个大小为 n 的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。123说明：你可以假设数组是非空的，并且给定的数组总是存在众数。 示例1：12输入: [3,2,3]输出: 3 示例2：12输入: [2,2,1,1,1,2,2]输出: 2 代码实现：123456789101112131415161718public int majorityElement(int[] nums) &#123; int count = 0; int res = 0; for (int i = 0; i &lt; nums.length; i++) &#123; if (count == 0) &#123; res = nums[i]; count++; &#125; else &#123; if (nums[i] == res) &#123; count++; &#125; else &#123; count--; &#125; &#125; &#125; return res; &#125; 思路：1众数的个数超过总个数的一半，因此，每次遇到不相同的数字，则相互抵消，遍历整个数组后，最后剩下的，一定是众数]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[136 只出现一次的数字]]></title>
+    <url>%2F2019%2F02%2F01%2F136%20%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97%2F</url>
+    <content type="text"><![CDATA[给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。123说明：你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？ 示例1：12输入: [2,2,1]输出: 1 示例2：12输入: [4,1,2,1,2]输出: 4 代码实现：12345678910public int singleNumber(int[] nums) &#123; if (nums.length == 0) &#123; return -1; &#125; int single = 0; for (int i = 0; i &lt; nums.length; i++) &#123; single ^= nums[i]; &#125; return single; &#125; 思路：123异或运算(^) 参与运算的两个对象，相应位相同为0，不同为1数组依次做异或运算，相同值抵消，便得到最终结果]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>异或运算</tag>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[类型转换与集合转换]]></title>
     <url>%2F2019%2F01%2F03%2F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E4%B8%8E%E9%9B%86%E5%90%88%E8%BD%AC%E6%8D%A2%2F</url>
     <content type="text"><![CDATA[类型转换parseInt()、valueOf()、toString()和intValue()的区别与联系 parseXxx():将String转换为对应xxx的普通数据类型String s = “123”;int b = Integer.parseInt(a);b就是int类型123了byte c = Byte.parseByte(a);c就是byte类型123了 valueOf():将参数转换为对应的包装类型String a = “123”;Integer b = Integer.valueOf(a);此时b为Integer类型 intValue():将Integer类型转换为int类型Integer a = 1;int b = a.intValue(a);此时b为int类型 toString():将引用数据类型转换为String字符串类型Integer a = new Integer(123);String b = a.toString();此时b为“123” 基本类型的数组转换为包装类型的数组 12345678910111213// java8实现方法int[] arr = &#123;&#125;;List&lt;Integer&gt; list = Arrays.stream(arr).boxed().collect(Collectors.toList());// apache commons-lang3 jar// maven&lt;dependency&gt; &lt;groupId&gt;org.apache.commons&lt;/groupId&gt; &lt;artifactId&gt;commons-lang3&lt;/artifactId&gt; &lt;version&gt;3.0&lt;/version&gt;&lt;/dependency&gt;Integer[] list = ArrayUtils.toObject(arr); 集合转换 数组转list1234567// 要求要转换的数组必须类型一致Integer[] arr = &#123;&#125;;// 第一种List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;(Arrays.asList(arr));// 第二种List&lt;Integer&gt; list = new ArrayList&lt;&gt;();list.addAll(Arrays.asList(arr)); 12345// 相对于上一种方法速度更快// 要求要转化的数组必须类型一致Integer[] arr = &#123;&#125;;List&lt;Integer&gt; list = new ArrayList&lt;&gt;();Collections.addAll(list,arr); list转数组123// 只能得到对应包装类型的数组List&lt;Integer&gt; list = new ArrayList&lt;&gt;();Integer[] arr = list.toArray(new Integer[list.size]);]]></content>
@@ -31,7 +76,6 @@
       </categories>
       <tags>
         <tag>GC</tag>
-        <tag>JAVA</tag>
         <tag>JVM</tag>
       </tags>
   </entry>
@@ -44,40 +88,6 @@
       </categories>
       <tags>
         <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[240 搜索二维矩阵II]]></title>
-    <url>%2F2018%2F02%2F02%2F240%20%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5II%2F</url>
-    <content type="text"><![CDATA[m x n 矩阵 matrix 中的一个目标值 target。该矩阵具有以下特性：每行的元素从左到右升序排列。每列的元素从上到下升序排列。示例：12345678910111213现有矩阵 matrix 如下：[ [1, 4, 7, 11, 15], [2, 5, 8, 12, 19], [3, 6, 9, 16, 22], [10, 13, 14, 17, 24], [18, 21, 23, 26, 30]]给定 target = 5，返回 true。给定 target = 20，返回 false。 代码实现：1234567891011121314151617public boolean searchMatrix(int[][] matrix, int target) &#123; if (matrix.length == 0 || matrix[0].length == 0) &#123; return false; &#125; int j = matrix[0].length - 1; int i = 0; while (i &lt; matrix.length &amp;&amp; j &gt;= 0) &#123; if (matrix[i][j] == target) &#123; return true; &#125; else if (matrix[i][j] &gt; target) &#123; j--; &#125; else &#123; i++; &#125; &#125; return false; &#125; 思路：1将target与每行的最后一个值比较，若target大于最后一个值，则target在改行下面，直到target小于等于最后一个值，此时target要么在该行，要么不存在]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>二维数组</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[169 求众数]]></title>
-    <url>%2F2018%2F02%2F02%2F169%20%E6%B1%82%E4%BC%97%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[给定一个大小为 n 的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。123说明：你可以假设数组是非空的，并且给定的数组总是存在众数。 示例1：12输入: [3,2,3]输出: 3 示例2：12输入: [2,2,1,1,1,2,2]输出: 2 代码实现：123456789101112131415161718public int majorityElement(int[] nums) &#123; int count = 0; int res = 0; for (int i = 0; i &lt; nums.length; i++) &#123; if (count == 0) &#123; res = nums[i]; count++; &#125; else &#123; if (nums[i] == res) &#123; count++; &#125; else &#123; count--; &#125; &#125; &#125; return res; &#125; 思路：1众数的个数超过总个数的一半，因此，每次遇到不相同的数字，则相互抵消，遍历整个数组后，最后剩下的，一定是众数]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>数组</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[136 只出现一次的数字]]></title>
-    <url>%2F2018%2F02%2F01%2F136%20%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97%2F</url>
-    <content type="text"><![CDATA[给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。123说明：你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？ 示例1：12输入: [2,2,1]输出: 1 示例2：12输入: [4,1,2,1,2]输出: 4 代码实现：12345678910public int singleNumber(int[] nums) &#123; if (nums.length == 0) &#123; return -1; &#125; int single = 0; for (int i = 0; i &lt; nums.length; i++) &#123; single ^= nums[i]; &#125; return single; &#125; 思路：123异或运算(^) 参与运算的两个对象，相应位相同为0，不同为1数组依次做异或运算，相同值抵消，便得到最终结果]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>异或运算</tag>
-        <tag>数组</tag>
       </tags>
   </entry>
 </search>
