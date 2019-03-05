@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[212 单词搜索II]]></title>
+    <url>%2F2019%2F03%2F05%2F212%20%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2II%2F</url>
+    <content type="text"><![CDATA[给定一个二维网格 board 和一个字典中的单词列表 words，找出所有同时在二维网格和字典中出现的单词。单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母在一个单词中不允许被重复使用。 示例：12345678910输入: words = [&quot;oath&quot;,&quot;pea&quot;,&quot;eat&quot;,&quot;rain&quot;] and board =[ [&apos;o&apos;,&apos;a&apos;,&apos;a&apos;,&apos;n&apos;], [&apos;e&apos;,&apos;t&apos;,&apos;a&apos;,&apos;e&apos;], [&apos;i&apos;,&apos;h&apos;,&apos;k&apos;,&apos;r&apos;], [&apos;i&apos;,&apos;f&apos;,&apos;l&apos;,&apos;v&apos;]]输出: [&quot;eat&quot;,&quot;oath&quot;] 说明：1你可以假设所有输入都由小写字母 a-z 组成。 提示：1234你需要优化回溯算法以通过更大数据量的测试。你能否早点停止回溯？如果当前单词不存在于所有单词的前缀中，则可以立即停止回溯。什么样的数据结构可以有效地执行这样的操作？散列表是否可行？为什么？ 前缀树如何？如果你想学习如何实现一个基本的前缀树，请先查看这个问题： 实现Trie（前缀树）。 实现代码：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899方法一： static int[][] directions = &#123;&#123;0, 1&#125;, &#123;1, 0&#125;, &#123;0, -1&#125;, &#123;-1, 0&#125;&#125;; static boolean[][] mark = null; public static List&lt;String&gt; findWords(char[][] board, String[] words) &#123; Set&lt;String&gt; res = new HashSet&lt;&gt;(); for (int i = 0; i &lt; words.length; i++) &#123; mark = new boolean[board.length][board[0].length]; for (int j = 0; j &lt; board.length; j++) &#123; for (int k = 0; k &lt; board[0].length; k++) &#123; if (board[j][k] == words[i].charAt(0)) &#123; mark[j][k] = true; if (exist(board, words[i], 1, j, k)) &#123; res.add(words[i]); break; &#125; mark[j][k] = false; &#125; &#125; &#125; &#125; List&lt;String&gt; result = new ArrayList&lt;&gt;(res); Collections.sort(result); return result; &#125; private static boolean exist(char[][] board, String words, int index, int j, int k) &#123; if (index == words.length()) &#123; return true; &#125; for (int i = 0; i &lt; directions.length; i++) &#123; int newJ = j + directions[i][0]; int newK = k + directions[i][1]; if (newJ &gt;= 0 &amp;&amp; newJ &lt; board.length &amp;&amp; newK &gt;= 0 &amp;&amp; newK &lt; board[0].length) &#123; if (!mark[newJ][newK] &amp;&amp; words.charAt(index) == board[newJ][newK]) &#123; mark[newJ][newK] = true; if (exist(board, words, index + 1, newJ, newK)) &#123; return true; &#125; mark[newJ][newK] = false; &#125; &#125; &#125; return false; &#125; 方法二： int[][] direction = &#123;&#123;1, 0&#125;, &#123;-1, 0&#125;, &#123;0, 1&#125;, &#123;0, -1&#125;&#125;; class Trie &#123; Trie[] children = new Trie[26]; String word; &#125; boolean[][] vis; List&lt;String&gt; res; public List&lt;String&gt; findWord(char[][] board, String[] words) &#123; Trie root = new Trie(); for (String word : words) &#123; Trie cur = root; for (char c : word.toCharArray()) &#123; if (cur.children[c - &apos;a&apos;] == null) &#123; cur.children[c - &apos;a&apos;] = new Trie(); &#125; cur = cur.children[c - &apos;a&apos;]; &#125; cur.word = word; &#125; res = new ArrayList&lt;&gt;(); vis = new boolean[board.length][board[0].length]; for (int i = 0; i &lt; board.length; i++) &#123; for (int j = 0; j &lt; board[0].length; j++) &#123; dfs(board, root, i, j); &#125; &#125; HashSet&lt;String&gt; set = new HashSet&lt;&gt;(res); res.clear(); res.addAll(set); return res; &#125; private void dfs(char[][] board, Trie root, int x, int y) &#123; if (x &gt;= 0 &amp;&amp; y &gt;= 0 &amp;&amp; x &lt; board.length &amp;&amp; y &lt; board[0].length &amp;&amp; !vis[x][y]) &#123; vis[x][y] = true; root = root.children[board[x][y] - &apos;a&apos;]; if (root != null) &#123; if (root.word != null) &#123; res.add(root.word); &#125; for (int i = 0; i &lt; direction.length; i++) &#123; dfs(board, root, x + direction[i][0], y + direction[i][1]); &#125; &#125; vis[x][y] = false; &#125; &#125; 思路：12方法一使用DFS方法二使用DFS加Trie树，早点停止回溯]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>DFS</tag>
+        <tag>树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[79 单词搜索]]></title>
     <url>%2F2019%2F03%2F05%2F79%20%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2%2F</url>
     <content type="text"><![CDATA[给定一个二维网格和一个单词，找出该单词是否存在于网格中。单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。 示例；12345678910board =[ [&apos;A&apos;,&apos;B&apos;,&apos;C&apos;,&apos;E&apos;], [&apos;S&apos;,&apos;F&apos;,&apos;C&apos;,&apos;S&apos;], [&apos;A&apos;,&apos;D&apos;,&apos;E&apos;,&apos;E&apos;]]给定 word = &quot;ABCCED&quot;, 返回 true.给定 word = &quot;SEE&quot;, 返回 true.给定 word = &quot;ABCB&quot;, 返回 false. 代码实现：1234567891011121314151617181920212223242526272829303132333435363738394041424344class Solution &#123; int[][] directions = &#123;&#123;1, 0&#125;, &#123;0, 1&#125;, &#123;-1, 0&#125;, &#123;0, -1&#125;&#125;; boolean[][] mark = null; public boolean exist(char[][] board, String word) &#123; if (word == null || board.length == 0) &#123; return false; &#125; mark = new boolean[board.length][board[0].length]; for (int i = 0; i &lt; board.length; i++) &#123; for (int j = 0; j &lt; board[0].length; j++) &#123; if (board[i][j] == word.charAt(0)) &#123; mark[i][j] = true; if (exist(board, word, 1, i, j)) &#123; return true; &#125; mark[i][j] = false; &#125; &#125; &#125; return false; &#125; private boolean exist(char[][] board, String word, int index, int i, int j) &#123; if (word.length() == index) &#123; return true; &#125; for (int temp = 0; temp &lt; directions.length; temp++) &#123; int newI = i + directions[temp][0]; int newJ = j + directions[temp][1]; if (newI &gt;= 0 &amp;&amp; newI &lt; board.length &amp;&amp; newJ &gt;= 0 &amp;&amp; newJ &lt; board[0].length) &#123; if (!mark[newI][newJ] &amp;&amp; word.charAt(index) == board[newI][newJ]) &#123; mark[newI][newJ] = true; if (exist(board, word, index + 1, newI, newJ)) &#123; return true; &#125; mark[newI][newJ] = false; &#125; &#125; &#125; return false; &#125;&#125; 思路：123深搜用一个二维数组表示上下左右四个方向另一个二维数组表示是否访问过该字母]]></content>
@@ -102,8 +114,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>二维数组</tag>
         <tag>动态规划</tag>
+        <tag>二维数组</tag>
       </tags>
   </entry>
   <entry>
@@ -147,8 +159,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>异或运算</tag>
         <tag>数组</tag>
+        <tag>异或运算</tag>
       </tags>
   </entry>
   <entry>
