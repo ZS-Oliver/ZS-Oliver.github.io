@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[242 有效的字母异位词]]></title>
+    <url>%2F2019%2F03%2F05%2F242%20%E6%9C%89%E6%95%88%E7%9A%84%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%2F</url>
+    <content type="text"><![CDATA[给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的一个字母异位词。示例1：12输入: s = &quot;anagram&quot;, t = &quot;nagaram&quot;输出: true 示例2：12输入: s = &quot;rat&quot;, t = &quot;car&quot;输出: false 说明：1你可以假设字符串只包含小写字母。 代码实现：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152方法一：public boolean isAnagram(String s, String t) &#123; if (s == null &amp;&amp; t == null) &#123; return true; &#125; if (s == null || t == null) &#123; return false; &#125; Map&lt;Character, Integer&gt; mapS = new HashMap&lt;&gt;(); Map&lt;Character, Integer&gt; mapT = new HashMap&lt;&gt;(); for (int i = 0; i &lt; s.length(); i++) &#123; if (mapS.containsKey(s.charAt(i))) &#123; mapS.put(s.charAt(i), mapS.get(s.charAt(i)) + 1); &#125; else &#123; mapS.put(s.charAt(i), 1); &#125; &#125; for (int i = 0; i &lt; t.length(); i++) &#123; if (mapT.containsKey(t.charAt(i))) &#123; mapT.put(t.charAt(i), mapT.get(t.charAt(i)) + 1); &#125; else &#123; mapT.put(t.charAt(i), 1); &#125; &#125; if (mapS.equals(mapT)) &#123; return true; &#125; return false; &#125; 方法二：public boolean isAnagram(String s, String t) &#123; if (s == null &amp;&amp; t == null) &#123; return true; &#125; if (s == null || t == null) &#123; return false; &#125; if(s.length() != t.length())&#123; return false; &#125; char[] ss = s.toCharArray(); char[] tt = t.toCharArray(); Arrays.sort(ss); Arrays.sort(tt); return Arrays.equals(ss,tt); &#125; 思路：12方法一使用map方法二使用Arrays类的特性]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>字符串</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[387 字符串中的第一个唯一字符]]></title>
+    <url>%2F2019%2F03%2F04%2F387%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%94%AF%E4%B8%80%E5%AD%97%E7%AC%A6%2F</url>
+    <content type="text"><![CDATA[给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。说明：1您可以假定该字符串只包含小写字母。 示例：12345s = &quot;leetcode&quot;返回 0.s = &quot;loveleetcode&quot;,返回 2. 代码实现：123456789101112131415161718192021222324252627282930313233方法1：public int firstUniqChar(String s) &#123; int res = -1; LinkedHashMap&lt;Character, Integer&gt; map = new LinkedHashMap&lt;&gt;(); for (int i = 0; i &lt; s.length(); i++) &#123; if (map.containsKey(s.charAt(i))) &#123; map.put(s.charAt(i), map.get(s.charAt(i)) + 1); &#125; else &#123; map.put(s.charAt(i), 1); &#125; &#125; for (int i = 0; i &lt; s.length(); i++) &#123; if (map.get(s.charAt(i)) == 1) &#123; res = i; break; &#125; &#125; return res; &#125; 方法2：public int firstUniqChar(String s) &#123; int res = -1; for (char ch = &apos;a&apos;; ch &lt;= &apos;z&apos;; ch++) &#123; int index = s.indexOf(ch); if (index != -1 &amp;&amp; index == s.lastIndexOf(ch)) &#123; res = (res == -1 || res &gt; index) ? index : res; &#125; &#125; return res; &#125; 思路：12方法1利用LinkedHashMap的有序性方法2利用String的indexOf()和lastIndexOf()方法]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>字符串</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[344 反转字符串]]></title>
+    <url>%2F2019%2F02%2F10%2F344%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%2F</url>
+    <content type="text"><![CDATA[编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。 你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。 示例1：12输入：[&quot;h&quot;,&quot;e&quot;,&quot;l&quot;,&quot;l&quot;,&quot;o&quot;]输出：[&quot;o&quot;,&quot;l&quot;,&quot;l&quot;,&quot;e&quot;,&quot;h&quot;] 示例2：12输入：[&quot;H&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;h&quot;]输出：[&quot;h&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;H&quot;] 代码实现：1234567891011121314public void reverseString(char[] s) &#123; if (s.length == 0) &#123; return; &#125; int i = 0, j = s.length - 1; while (i &lt; s.length / 2) &#123; char temp = s[i]; s[i] = s[j]; s[j] = temp; i++; j--; &#125; &#125; 思路：1首位互换，以temp作为中间值]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>字符串</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[139 单词拆分]]></title>
     <url>%2F2019%2F02%2F09%2F139%20%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86%2F</url>
     <content type="text"><![CDATA[给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。说明：12拆分时可以重复使用字典中的单词。你可以假设字典中没有重复的单词。 示例1：123输入: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]输出: true解释: 返回 true 因为 &quot;leetcode&quot; 可以被拆分成 &quot;leet code&quot;。 示例2：1234输入: s = &quot;applepenapple&quot;, wordDict = [&quot;apple&quot;, &quot;pen&quot;]输出: true解释: 返回 true 因为 &quot;applepenapple&quot; 可以被拆分成 &quot;apple pen apple&quot;。 注意你可以重复使用字典中的单词。 示例3：12输入: s = &quot;catsandog&quot;, wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]输出: false 代码实现：1234567891011121314151617public boolean wordBreak(String s, List&lt;String&gt; wordDict) &#123; if(s.isEmpty() || wordDict.isEmpty())&#123; return false; &#125; boolean[] mark = new boolean[s.length() + 1]; mark[0] = true; for (int i = 1; i &lt;= s.length(); i++) &#123; for (int j = 0; j &lt; i; j++) &#123; if(mark[j] &amp;&amp; wordDict.contains(s.substring(j,i)))&#123; mark[i] = true; break; &#125; &#125; &#125; return mark[s.length()]; &#125; 思路：1234动态规划将一个字符串拆成两部分，若前半部分是可分的，后半部分存在于dict中，则整个字符串成立例如leetcode，若leet是可拆分的，code在dict中，则leetcode是可拆分的。]]></content>
@@ -9,6 +43,7 @@
       </categories>
       <tags>
         <tag>数组</tag>
+        <tag>字符串</tag>
         <tag>动态规划</tag>
       </tags>
   </entry>
@@ -21,6 +56,7 @@
       </categories>
       <tags>
         <tag>数组</tag>
+        <tag>字符串</tag>
         <tag>DFS</tag>
       </tags>
   </entry>
@@ -33,6 +69,7 @@
       </categories>
       <tags>
         <tag>数组</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
@@ -43,8 +80,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>二维数组</tag>
         <tag>动态规划</tag>
+        <tag>二维数组</tag>
       </tags>
   </entry>
   <entry>
