@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[79 单词搜索]]></title>
+    <url>%2F2019%2F03%2F05%2F79%20%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2%2F</url>
+    <content type="text"><![CDATA[给定一个二维网格和一个单词，找出该单词是否存在于网格中。单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。 示例；12345678910board =[ [&apos;A&apos;,&apos;B&apos;,&apos;C&apos;,&apos;E&apos;], [&apos;S&apos;,&apos;F&apos;,&apos;C&apos;,&apos;S&apos;], [&apos;A&apos;,&apos;D&apos;,&apos;E&apos;,&apos;E&apos;]]给定 word = &quot;ABCCED&quot;, 返回 true.给定 word = &quot;SEE&quot;, 返回 true.给定 word = &quot;ABCB&quot;, 返回 false. 代码实现：1234567891011121314151617181920212223242526272829303132333435363738394041424344class Solution &#123; int[][] directions = &#123;&#123;1, 0&#125;, &#123;0, 1&#125;, &#123;-1, 0&#125;, &#123;0, -1&#125;&#125;; boolean[][] mark = null; public boolean exist(char[][] board, String word) &#123; if (word == null || board.length == 0) &#123; return false; &#125; mark = new boolean[board.length][board[0].length]; for (int i = 0; i &lt; board.length; i++) &#123; for (int j = 0; j &lt; board[0].length; j++) &#123; if (board[i][j] == word.charAt(0)) &#123; mark[i][j] = true; if (exist(board, word, 1, i, j)) &#123; return true; &#125; mark[i][j] = false; &#125; &#125; &#125; return false; &#125; private boolean exist(char[][] board, String word, int index, int i, int j) &#123; if (word.length() == index) &#123; return true; &#125; for (int temp = 0; temp &lt; directions.length; temp++) &#123; int newI = i + directions[temp][0]; int newJ = j + directions[temp][1]; if (newI &gt;= 0 &amp;&amp; newI &lt; board.length &amp;&amp; newJ &gt;= 0 &amp;&amp; newJ &lt; board[0].length) &#123; if (!mark[newI][newJ] &amp;&amp; word.charAt(index) == board[newI][newJ]) &#123; mark[newI][newJ] = true; if (exist(board, word, index + 1, newI, newJ)) &#123; return true; &#125; mark[newI][newJ] = false; &#125; &#125; &#125; return false; &#125;&#125; 思路：123深搜用一个二维数组表示上下左右四个方向另一个二维数组表示是否访问过该字母]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>DFS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[208 实现Trie(前缀树)]]></title>
+    <url>%2F2019%2F03%2F05%2F208%20%E5%AE%9E%E7%8E%B0Trie(%E5%89%8D%E7%BC%80%E6%A0%91)%2F</url>
+    <content type="text"><![CDATA[实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。示例：12345678Trie trie = new Trie();trie.insert(&quot;apple&quot;);trie.search(&quot;apple&quot;); // 返回 truetrie.search(&quot;app&quot;); // 返回 falsetrie.startsWith(&quot;app&quot;); // 返回 truetrie.insert(&quot;app&quot;); trie.search(&quot;app&quot;); // 返回 true 说明：12你可以假设所有的输入都是由小写字母 a-z 构成的。保证所有输入均为非空字符串。 代码实现：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758class Trie &#123; class TrieNode &#123; boolean isEnd; char val; TrieNode[] children = new TrieNode[26]; TrieNode(char c) &#123; this.val = c; isEnd = false; &#125; &#125; private TrieNode root; /** Initialize your data structure here. */ public Trie() &#123; this.root = new TrieNode(&apos; &apos;); &#125; /** Inserts a word into the trie. */ public void insert(String word) &#123; TrieNode node = root; for (int i = 0; i &lt; word.length(); i++) &#123; int n = word.charAt(i) - &apos;a&apos;; if (node.children[n] == null) &#123; node.children[n] = new TrieNode(word.charAt(i)); &#125; node = node.children[n]; &#125; node.isEnd = true; &#125; /** Returns if the word is in the trie. */ public boolean search(String word) &#123; TrieNode node = root; for (int i = 0; i &lt; word.length(); i++) &#123; int n = word.charAt(i) - &apos;a&apos;; node = node.children[n]; if (node == null) &#123; return false; &#125; &#125; return node.isEnd; &#125; /** Returns if there is any word in the trie that starts with the given prefix. */ public boolean startsWith(String prefix) &#123; TrieNode node = root; for (int i = 0; i &lt; prefix.length(); i++) &#123; int n = prefix.charAt(i) - &apos;a&apos;; node = node.children[n]; if (node == null) &#123; return false; &#125; &#125; return true; &#125;&#125; 思路：12345Trie树,是一种树形结构,是一种哈希树的变种,最大限度地减少无谓的字符串比较，查询效率比哈希表高通过isEnd 记录是否到达叶子节点val 记录具体的值children[] 封装isEnd和val]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[242 有效的字母异位词]]></title>
     <url>%2F2019%2F03%2F05%2F242%20%E6%9C%89%E6%95%88%E7%9A%84%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%2F</url>
     <content type="text"><![CDATA[给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的一个字母异位词。示例1：12输入: s = &quot;anagram&quot;, t = &quot;nagaram&quot;输出: true 示例2：12输入: s = &quot;rat&quot;, t = &quot;car&quot;输出: false 说明：1你可以假设字符串只包含小写字母。 代码实现：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152方法一：public boolean isAnagram(String s, String t) &#123; if (s == null &amp;&amp; t == null) &#123; return true; &#125; if (s == null || t == null) &#123; return false; &#125; Map&lt;Character, Integer&gt; mapS = new HashMap&lt;&gt;(); Map&lt;Character, Integer&gt; mapT = new HashMap&lt;&gt;(); for (int i = 0; i &lt; s.length(); i++) &#123; if (mapS.containsKey(s.charAt(i))) &#123; mapS.put(s.charAt(i), mapS.get(s.charAt(i)) + 1); &#125; else &#123; mapS.put(s.charAt(i), 1); &#125; &#125; for (int i = 0; i &lt; t.length(); i++) &#123; if (mapT.containsKey(t.charAt(i))) &#123; mapT.put(t.charAt(i), mapT.get(t.charAt(i)) + 1); &#125; else &#123; mapT.put(t.charAt(i), 1); &#125; &#125; if (mapS.equals(mapT)) &#123; return true; &#125; return false; &#125; 方法二：public boolean isAnagram(String s, String t) &#123; if (s == null &amp;&amp; t == null) &#123; return true; &#125; if (s == null || t == null) &#123; return false; &#125; if(s.length() != t.length())&#123; return false; &#125; char[] ss = s.toCharArray(); char[] tt = t.toCharArray(); Arrays.sort(ss); Arrays.sort(tt); return Arrays.equals(ss,tt); &#125; 思路：12方法一使用map方法二使用Arrays类的特性]]></content>
@@ -80,8 +102,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>二维数组</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -125,8 +147,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>数组</tag>
         <tag>异或运算</tag>
+        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
