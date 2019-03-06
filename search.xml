@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[150 逆波兰表达式求值]]></title>
+    <url>%2F2019%2F03%2F06%2F150%20%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC%2F</url>
+    <content type="text"><![CDATA[根据逆波兰表示法，求表达式的值。有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。 说明：12整数除法只保留整数部分。给定逆波兰表达式总是有效的。换句话说，表达式总会得出有效数值且不存在除数为 0 的情况。 示例1：123输入: [&quot;2&quot;, &quot;1&quot;, &quot;+&quot;, &quot;3&quot;, &quot;*&quot;]输出: 9解释: ((2 + 1) * 3) = 9 示例2：123输入: [&quot;4&quot;, &quot;13&quot;, &quot;5&quot;, &quot;/&quot;, &quot;+&quot;]输出: 6解释: (4 + (13 / 5)) = 6 示例3：12345678910输入: [&quot;10&quot;, &quot;6&quot;, &quot;9&quot;, &quot;3&quot;, &quot;+&quot;, &quot;-11&quot;, &quot;*&quot;, &quot;/&quot;, &quot;*&quot;, &quot;17&quot;, &quot;+&quot;, &quot;5&quot;, &quot;+&quot;]输出: 22解释: ((10 * (6 / ((9 + 3) * -11))) + 17) + 5= ((10 * (6 / (12 * -11))) + 17) + 5= ((10 * (6 / -132)) + 17) + 5= ((10 * 0) + 17) + 5= (0 + 17) + 5= 17 + 5= 22 代码实现：123456789101112131415161718192021222324String signal = &quot;+-*/&quot;; public int evalRPN(String[] tokens) &#123; Stack&lt;Integer&gt; nums = new Stack&lt;&gt;(); for (int i = 0; i &lt; tokens.length; i++) &#123; if (signal.contains(tokens[i])) &#123; int second = nums.pop(); int first = nums.pop(); if (&quot;+&quot;.equals(tokens[i])) &#123; first = first + second; &#125; else if (&quot;-&quot;.equals(tokens[i])) &#123; first = first - second; &#125; else if (&quot;*&quot;.equals(tokens[i])) &#123; first = first * second; &#125; else &#123; first = first / second; &#125; nums.push(first); &#125; else &#123; nums.push(Integer.parseInt(tokens[i])); &#125; &#125; return nums.pop(); &#125; 思路：1维护一个栈，当是数字的时候，直接push，当是符号的时候，从栈顶pop两个元素做运算]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[239 滑动窗口最大值]]></title>
+    <url>%2F2019%2F03%2F06%2F239%20%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%80%E5%A4%A7%E5%80%BC%2F</url>
+    <content type="text"><![CDATA[给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口 k 内的数字。滑动窗口每次只向右移动一位。返回滑动窗口最大值示例：123456789101112输入: nums = [1,3,-1,-3,5,3,6,7], 和 k = 3输出: [3,3,5,5,6,7] 解释: 滑动窗口的位置 最大值--------------- -----[1 3 -1] -3 5 3 6 7 3 1 [3 -1 -3] 5 3 6 7 3 1 3 [-1 -3 5] 3 6 7 5 1 3 -1 [-3 5 3] 6 7 5 1 3 -1 -3 [5 3 6] 7 6 1 3 -1 -3 5 [3 6 7] 7 注意：1你可以假设 k 总是有效的，1 ≤ k ≤ 输入数组的大小，且输入数组不为空。 代码实现：12345678910111213141516171819202122232425262728293031public int[] maxSlidingWindow(int[] nums, int k) &#123; int[] res = new int[nums.length - k + 1]; int count = 0; if (nums.length == 0 || nums == null) &#123; return nums; &#125; LinkedList&lt;Integer&gt; queue = new LinkedList&lt;&gt;(); for (int i = 0; i &lt; k - 1; i++) &#123; while (!queue.isEmpty() &amp;&amp; nums[i] &gt; nums[queue.getLast()]) &#123; queue.removeLast(); &#125; queue.addLast(i); &#125; for (int i = k - 1; i &lt; nums.length; i++) &#123; while (!queue.isEmpty() &amp;&amp; nums[i] &gt; nums[queue.getLast()]) &#123; queue.removeLast(); &#125; queue.addLast(i); if (i - queue.getFirst() + 1 &gt; k) &#123; queue.removeFirst(); &#125; res[count++] = nums[queue.getFirst()]; &#125; return res; &#125; 思路：123456789使用一个双向队列，记录元素的索引。保证队列头是当前最大的元素插入元素，判断当前元素是否前面的元素，如果大于，则删除前面的元素如果小于，则直接插入1. 初始化，遍历比窗口小一的大小，按照上述规则插入2. 继续按照上述规则插入，插入后，判断队列大小是否超出容器大小，超出，则删除头部。3. 当前头部就是最大的元素索引]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>队列</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[347 前K个高频元素]]></title>
     <url>%2F2019%2F03%2F06%2F347%20%E5%89%8DK%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0%2F</url>
     <content type="text"><![CDATA[给定一个非空的整数数组，返回其中出现频率前 k 高的元素。示例1：12输入: nums = [1,1,1,2,2,3], k = 2输出: [1,2] 示例2：12输入: nums = [1], k = 1输出: [1] 说明：12你可以假设给定的 k 总是合理的，且 1 ≤ k ≤ 数组中不相同的元素的个数。你的算法的时间复杂度必须优于 O(n log n) , n 是数组的大小。 代码实现：1234567891011121314151617181920212223public List&lt;Integer&gt; topKFrequent(int[] nums, int k) &#123; List&lt;Integer&gt; res = new ArrayList&lt;&gt;(); Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;(); for (int i = 0; i &lt; nums.length; i++) &#123; if (!map.containsKey(nums[i])) &#123; map.put(nums[i], 1); &#125; else &#123; map.put(nums[i], map.get(nums[i]) + 1); &#125; &#125; PriorityQueue&lt;Map.Entry&lt;Integer, Integer&gt;&gt; heap = new PriorityQueue&lt;&gt;((o1, o2) -&gt; o2.getValue() - o1.getValue()); for (Map.Entry&lt;Integer, Integer&gt; m : map.entrySet()) &#123; heap.offer(m); &#125; for (int i = 0; i &lt; k; i++) &#123; res.add(heap.poll().getKey()); &#125; return res; &#125; 思路：123使用HashMap统计每个key出现的次数重写堆的排序规则，按次数排序取前k个元素]]></content>
