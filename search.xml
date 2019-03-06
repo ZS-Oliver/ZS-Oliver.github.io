@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[347 前K个高频元素]]></title>
+    <url>%2F2019%2F03%2F06%2F347%20%E5%89%8DK%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0%2F</url>
+    <content type="text"><![CDATA[给定一个非空的整数数组，返回其中出现频率前 k 高的元素。示例1：12输入: nums = [1,1,1,2,2,3], k = 2输出: [1,2] 示例2：12输入: nums = [1], k = 1输出: [1] 说明：12你可以假设给定的 k 总是合理的，且 1 ≤ k ≤ 数组中不相同的元素的个数。你的算法的时间复杂度必须优于 O(n log n) , n 是数组的大小。 代码实现：1234567891011121314151617181920212223public List&lt;Integer&gt; topKFrequent(int[] nums, int k) &#123; List&lt;Integer&gt; res = new ArrayList&lt;&gt;(); Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;(); for (int i = 0; i &lt; nums.length; i++) &#123; if (!map.containsKey(nums[i])) &#123; map.put(nums[i], 1); &#125; else &#123; map.put(nums[i], map.get(nums[i]) + 1); &#125; &#125; PriorityQueue&lt;Map.Entry&lt;Integer, Integer&gt;&gt; heap = new PriorityQueue&lt;&gt;((o1, o2) -&gt; o2.getValue() - o1.getValue()); for (Map.Entry&lt;Integer, Integer&gt; m : map.entrySet()) &#123; heap.offer(m); &#125; for (int i = 0; i &lt; k; i++) &#123; res.add(heap.poll().getKey()); &#125; return res; &#125; 思路：123使用HashMap统计每个key出现的次数重写堆的排序规则，按次数排序取前k个元素]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>堆</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[378 有序矩阵中第K小的元素]]></title>
+    <url>%2F2019%2F03%2F06%2F378%20%E6%9C%89%E5%BA%8F%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%AC%ACK%E5%B0%8F%E7%9A%84%E5%85%83%E7%B4%A0%2F</url>
+    <content type="text"><![CDATA[给定一个 n x n 矩阵，其中每行和每列元素均按升序排序，找到矩阵中第k小的元素。请注意，它是排序后的第k小元素，而不是第k个元素。示例：12345678matrix = [ [ 1, 5, 9], [10, 11, 13], [12, 13, 15]],k = 8,返回 13。 说明：1你可以假设 k 的值永远是有效的, 1 ≤ k ≤ n2 。 代码实现：1234567891011121314151617181920public int kthSmallest(int[][] matrix, int k) &#123; if (k &lt; 0 || k &gt; matrix.length * matrix[0].length) &#123; return -1; &#125; PriorityQueue&lt;Integer&gt; maxHeap = new PriorityQueue&lt;&gt;(Comparator.reverseOrder()); for (int i = 0; i &lt; matrix.length; i++) &#123; for (int j = 0; j &lt; matrix[0].length; j++) &#123; if (maxHeap.size() &lt; k) &#123; maxHeap.offer(matrix[i][j]); &#125; else &#123; if (maxHeap.peek() &gt; matrix[i][j]) &#123; maxHeap.poll(); maxHeap.offer(matrix[i][j]); &#125; &#125; &#125; &#125; return maxHeap.peek(); &#125; 思路：1维护一个最大堆，大小为k，即maxHeap.poll()为第k小的元素]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>堆</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[295 数据流的中位数]]></title>
     <url>%2F2019%2F03%2F06%2F295%20%E6%95%B0%E6%8D%AE%E6%B5%81%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0%2F</url>
     <content type="text"><![CDATA[中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。例如 [2,3,4] 的中位数是 3 [2,3] 的中位数是 (2 + 3) / 2 = 2.5 设计一个支持以下两种操作的数据结构： void addNum(int num) - 从数据流中添加一个整数到数据结构中。 double findMedian() - 返回目前所有元素的中位数。 示例：12345addNum(1)addNum(2)findMedian() -&gt; 1.5addNum(3) findMedian() -&gt; 2 代码实现：123456789101112131415161718192021222324252627int count = 0; PriorityQueue&lt;Integer&gt; minHeap = null; PriorityQueue&lt;Integer&gt; maxHeap = null; /** initialize your data structure here. */ public MedianFinder() &#123; minHeap = new PriorityQueue&lt;&gt;(); maxHeap = new PriorityQueue&lt;&gt;(Comparator.reverseOrder()); &#125; public void addNum(int num) &#123; if (count % 2 == 0) &#123; maxHeap.offer(num); minHeap.offer(maxHeap.poll()); &#125; else &#123; minHeap.offer(num); maxHeap.offer(minHeap.poll()); &#125; count++; &#125; public double findMedian() &#123; if (count % 2 == 1) &#123; return minHeap.peek(); &#125; else &#123; return (maxHeap.peek() + minHeap.peek()) / 2.0; &#125; &#125; 思路：123同时维护最大堆和最小堆保证最大堆中存储的是数组中小的部分，且头部是中间值保证最小堆中存储的是数组中大的部分，且头部是中间值]]></content>
@@ -192,8 +214,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>异或运算</tag>
         <tag>数组</tag>
+        <tag>异或运算</tag>
       </tags>
   </entry>
   <entry>
