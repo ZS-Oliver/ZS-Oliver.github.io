@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[295 数据流的中位数]]></title>
+    <url>%2F2019%2F03%2F06%2F295%20%E6%95%B0%E6%8D%AE%E6%B5%81%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。例如 [2,3,4] 的中位数是 3 [2,3] 的中位数是 (2 + 3) / 2 = 2.5 设计一个支持以下两种操作的数据结构： void addNum(int num) - 从数据流中添加一个整数到数据结构中。 double findMedian() - 返回目前所有元素的中位数。 示例：12345addNum(1)addNum(2)findMedian() -&gt; 1.5addNum(3) findMedian() -&gt; 2 代码实现：123456789101112131415161718192021222324252627int count = 0; PriorityQueue&lt;Integer&gt; minHeap = null; PriorityQueue&lt;Integer&gt; maxHeap = null; /** initialize your data structure here. */ public MedianFinder() &#123; minHeap = new PriorityQueue&lt;&gt;(); maxHeap = new PriorityQueue&lt;&gt;(Comparator.reverseOrder()); &#125; public void addNum(int num) &#123; if (count % 2 == 0) &#123; maxHeap.offer(num); minHeap.offer(maxHeap.poll()); &#125; else &#123; minHeap.offer(num); maxHeap.offer(minHeap.poll()); &#125; count++; &#125; public double findMedian() &#123; if (count % 2 == 1) &#123; return minHeap.peek(); &#125; else &#123; return (maxHeap.peek() + minHeap.peek()) / 2.0; &#125; &#125; 思路：123同时维护最大堆和最小堆保证最大堆中存储的是数组中小的部分，且头部是中间值保证最小堆中存储的是数组中大的部分，且头部是中间值]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>堆</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[215 数组中的第K个最大元素]]></title>
+    <url>%2F2019%2F03%2F06%2F215%20%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AC%ACK%E4%B8%AA%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0%2F</url>
+    <content type="text"><![CDATA[在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。示例1：12输入: [3,2,1,5,6,4] 和 k = 2输出: 5 示例2：12输入: [3,2,3,1,2,4,5,5,6] 和 k = 4输出: 4 说明：1你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。 代码实现：12345678910111213public int findKthLargest(int[] nums, int k) &#123; if (nums.length == 0 || k &lt; 0 || k &gt; nums.length) &#123; return -1; &#125; PriorityQueue&lt;Integer&gt; heap = new PriorityQueue&lt;&gt;(); for (int val : nums) &#123; heap.offer(val); if (heap.size() &gt; k) &#123; heap.poll(); &#125; &#125; return heap.peek(); &#125; 思路：1PriorityQueue 时间复杂度为 Nlog(K),空间复杂度为K]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>堆</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[155 最小栈]]></title>
     <url>%2F2019%2F03%2F05%2F155%20%E6%9C%80%E5%B0%8F%E6%A0%88%2F</url>
     <content type="text"><![CDATA[设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。 push(x) – 将元素 x 推入栈中。 pop() – 删除栈顶的元素。 top() – 获取栈顶元素。 getMin() – 检索栈中的最小元素。 示例：12345678MinStack minStack = new MinStack();minStack.push(-2);minStack.push(0);minStack.push(-3);minStack.getMin(); --&gt; 返回 -3.minStack.pop();minStack.top(); --&gt; 返回 0.minStack.getMin(); --&gt; 返回 -2. 代码实现：1234567891011121314151617181920212223242526272829Stack&lt;Integer&gt; stack; Stack&lt;Integer&gt; minStack; public MinStack() &#123; this.stack = new Stack&lt;&gt;(); this.minStack = new Stack&lt;&gt;(); &#125; public void push(int x) &#123; stack.push(x); if (minStack.empty() || minStack.peek() &gt;= x) &#123; minStack.push(x); &#125; &#125; public void pop() &#123; int x = stack.pop(); if (minStack.peek() == x) &#123; minStack.pop(); &#125; &#125; public int top() &#123; return stack.peek(); &#125; public int getMin() &#123; return minStack.peek(); &#125; 思路：1维护两个栈，一个保存所有值，一个只保存当前最小值]]></content>
@@ -170,8 +192,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>数组</tag>
         <tag>异或运算</tag>
+        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
