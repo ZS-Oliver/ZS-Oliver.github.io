@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[328 奇偶链表]]></title>
+    <url>%2F2019%2F03%2F12%2F328%20%E5%A5%87%E5%81%B6%E9%93%BE%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[给定一个单链表，把所有的奇数节点和偶数节点分别排在一起。请注意，这里的奇数节点和偶数节点指的是节点编号的奇偶性，而不是节点的值的奇偶性。请尝试使用原地算法完成。你的算法的空间复杂度应为 O(1)，时间复杂度应为 O(nodes)，nodes 为节点总数。 示例1：12输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL输出: 1-&gt;3-&gt;5-&gt;2-&gt;4-&gt;NULL 示例2：12输入: 2-&gt;1-&gt;3-&gt;5-&gt;6-&gt;4-&gt;7-&gt;NULL 输出: 2-&gt;3-&gt;6-&gt;7-&gt;1-&gt;5-&gt;4-&gt;NULL 说明：12应当保持奇数节点和偶数节点的相对顺序。链表的第一个节点视为奇数节点，第二个节点视为偶数节点，以此类推。 代码实现：12345678910111213141516171819public ListNode oddEvenList(ListNode head) &#123; if (head == null || head.next == null) &#123; return head; &#125; ListNode pre = head; ListNode cur = head.next; ListNode tmp = null; while (cur != null &amp;&amp; cur.next != null) &#123; tmp = pre.next; pre.next = cur.next; cur.next = cur.next.next; pre.next.next = tmp; pre = pre.next; cur = cur.next; &#125; return head; &#125; 思路：1234使用两个指针，pre指向奇节点，cur指向偶节点。把偶节点cur后面的那个奇节点提前到pre的后面。然后pre和cur各自前进一步，此时cur又指向偶节点，pre指向当前奇节点的末尾。重复]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[141 环形链表]]></title>
     <url>%2F2019%2F03%2F06%2F141%20%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[给定一个链表，判断链表中是否有环。为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。 示例1：123输入：head = [3,2,0,-4], pos = 1输出：true解释：链表中有一个环，其尾部连接到第二个节点。 示例2：123输入：head = [1,2], pos = 0输出：true解释：链表中有一个环，其尾部连接到第一个节点。 示例3：123输入：head = [1], pos = -1输出：false解释：链表中没有环。 代码实现：123456789101112131415public boolean hasCycle(ListNode head) &#123; if(head == null || head.next == null)&#123; return false; &#125; ListNode fast = head; ListNode slow = head; while(fast != null &amp;&amp; fast.next != null)&#123; fast = fast.next.next; slow = slow.next; if(fast == slow)&#123; return true; &#125; &#125; return false; &#125; 思路：1快慢指针，当两者相等时，则有环]]></content>
@@ -258,8 +269,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>数组</tag>
         <tag>异或运算</tag>
+        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
