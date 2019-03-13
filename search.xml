@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[整理Java Enum类相关知识]]></title>
+    <url>%2F2019%2F03%2F13%2F%E6%95%B4%E7%90%86Java%20Enum%E7%B1%BB%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%2F</url>
+    <content type="text"><![CDATA[定义 将相关常量分组到一个枚举类型 123456789101112public enum Sex&#123; MALE,FEMALE&#125;public enum Sex&#123; MALE(1),FEMALE(2); // 通过构造方法传参 private int code; private Sex(int code)&#123; this.code = code; &#125;&#125; 在枚举类中添加方法,需在enum实例序列的最后加分号,且java要先定义enum实例 123456789101112131415161718public enum Sex&#123; // enum实例序列 MALE(&quot;雄性&quot;,1),FEMALE(&quot;雌性&quot;,2); // 成员变量 private String name; private int index; // 构造方法 private Sex(String name,int index)&#123; this.name = name; this.index = index; &#125; // 普通方法 public static final Map&lt;String,int&gt; kv = Arrays.stream(values()).collect(Collectors.toMap(Sex::getName,Sex::getIndex));&#125; 常用方法12345枚举类.values() // 返回包括所有枚举变量的数组枚举变量.oridal() // 枚举类会给所有的枚举变量一个默认的次序,从0开始 .ordinal()方法就是获取这个次序枚举变量.toString() // 直接返回枚举定义枚举变量的字符串枚举变量.toString() // 返回该枚举变量所对应的字符串枚举变量.compareTo() // 比较两个枚举变量的次序,返回两个次序相减后的结果 枚举集合 java.util.EnumSet和java.util.EnumMap是两个枚举集合,EnumSet保证集合中元素不重复,EnumMap中的key是enum类型,value是任意类型 EnumSet (注)EnumSet里的枚举变量必须属于同一个枚举值 1234// 创建包含指定枚举类型中所有枚举变量的EnumSetEnumSet&lt;E&gt; es = EnumSet.allOf(E.class);// EnumSet为非同步的,创建同步EnumSetSet&lt;E&gt; s = Collections.synchronizedSet(EnumSet.noneOf(E.class)); EnumMap 123456// EnumMap实例化,E为枚举类类型EnumMap&lt;E,String&gt; enumMap = new EnumMap&lt;&gt;(E.class);// 通过put()方法,给对应的枚举变量赋value值enumMap.put(E.xx,str);// 通过get()方法,根据传入的枚举变量获得对应的value值String str = enumMap.get(E.xx); 其他知识点 枚举类继承自java.lang.Enum类,所以枚举对象不能再继承其他类。被enum修饰的类默认为final,所以也不能被其他类继承。 enum类可以实现接口,在interface内部定义enum块,即可通过继承接口,达到组合enum与元素的目的。 enum类中的元素定义必须写在所有其他部分前面,否则会编译错误。 values()方法是编译器插入到enum定义中的static方法,所以,当你将enum实例向上转型为父类Enum时,values()就不可访问了。解决办法:在Class中有一个getEnumConstants()方法，所以即便Enum接口中没有values()方法,我们仍然可以通过Class对象取得所有的enum实例]]></content>
+      <categories>
+        <category>技术文档</category>
+      </categories>
+      <tags>
+        <tag>枚举</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[328 奇偶链表]]></title>
+    <url>%2F2019%2F03%2F12%2F237%20%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9%2F</url>
+    <content type="text"><![CDATA[请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。示例1：123输入: head = [4,5,1,9], node = 5输出: [4,1,9]解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9. 示例2：123输入: head = [4,5,1,9], node = 1输出: [4,5,9]解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 5 -&gt; 9. 说明：1234链表至少包含两个节点。链表中所有节点的值都是唯一的。给定的节点为非末尾节点并且一定是链表中的一个有效节点。不要从你的函数中返回任何结果。 代码实现：1234public void deleteNode(ListNode node) &#123; node.val = node.next.val; node.next = node.next.next; &#125; 思路：1将下一个节点复制到当前节点]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[328 奇偶链表]]></title>
     <url>%2F2019%2F03%2F12%2F328%20%E5%A5%87%E5%81%B6%E9%93%BE%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[给定一个单链表，把所有的奇数节点和偶数节点分别排在一起。请注意，这里的奇数节点和偶数节点指的是节点编号的奇偶性，而不是节点的值的奇偶性。请尝试使用原地算法完成。你的算法的空间复杂度应为 O(1)，时间复杂度应为 O(nodes)，nodes 为节点总数。 示例1：12输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL输出: 1-&gt;3-&gt;5-&gt;2-&gt;4-&gt;NULL 示例2：12输入: 2-&gt;1-&gt;3-&gt;5-&gt;6-&gt;4-&gt;7-&gt;NULL 输出: 2-&gt;3-&gt;6-&gt;7-&gt;1-&gt;5-&gt;4-&gt;NULL 说明：12应当保持奇数节点和偶数节点的相对顺序。链表的第一个节点视为奇数节点，第二个节点视为偶数节点，以此类推。 代码实现：12345678910111213141516171819public ListNode oddEvenList(ListNode head) &#123; if (head == null || head.next == null) &#123; return head; &#125; ListNode pre = head; ListNode cur = head.next; ListNode tmp = null; while (cur != null &amp;&amp; cur.next != null) &#123; tmp = pre.next; pre.next = cur.next; cur.next = cur.next.next; pre.next.next = tmp; pre = pre.next; cur = cur.next; &#125; return head; &#125; 思路：1234使用两个指针，pre指向奇节点，cur指向偶节点。把偶节点cur后面的那个奇节点提前到pre的后面。然后pre和cur各自前进一步，此时cur又指向偶节点，pre指向当前奇节点的末尾。重复]]></content>
@@ -118,8 +140,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>DFS</tag>
         <tag>树</tag>
+        <tag>DFS</tag>
       </tags>
   </entry>
   <entry>
