@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Get和Post的区别]]></title>
+    <url>%2F2019%2F03%2F14%2FGet%E5%92%8CPost%E7%9A%84%E5%8C%BA%E5%88%AB%2F</url>
+    <content type="text"><![CDATA[GET和POST有什么区别 对于RESTful规范来说，get用于获取数据,主要用来搜索排序和筛选之类，post用于提交数据，主要用来修改和写入 GET方法是幂等的，所以适合作为查询操作，POST方法是非幂等的，所以用来表示新增操作 POST更安全，不会作为URL的一部分，不会被缓存、保存在服务器日志、以及浏览器记录中 浏览器限制GET的URL长度 POST用于修改何写入数据 GET要快于POST POST请求包含更多的请求头(POST需要在请求的body里包含数据，所以要多了几个数据描述首部字段) POST在真正接收数据之前会先将请求头发送给服务器确认，然后才真正发送数据 POST请求的过程 浏览器请求tcp连接（第一次握手） 服务器答应进行tcp连接（第二次握手） 浏览器确认，并发送post请求头（第三次握手，这个报文较小，所以http会在此时进行第一次数据发送） 服务器返回100 continue响应 浏览器发送数据（body） 服务器返回200 ok响应 get请求的过程 浏览器发送tcp连接（第一次握手） 服务器答应进行tcp连接（第二次握手） 浏览器确认，并发送get请求头和数据（第三次握手） 服务器返回200 ok响应 GET会将数据缓存起来（静态资源），而POST不会 幂等性HTTP方法的幂等性是指一次和多次请求某一个资源应该具有同样的副作用(副作用指当你发送完一个请求以后，网站上的资源状态没有发生修改，即认为这个请求是无副作用的) HTTP的GET/POST/DELETE/PUT方法幂等的情况： GET是幂等的，无副作用的 只查询数据，不会影响到资源的变化 DELETE/PUT 是幂等的，有副作用的 它调用一次和调用多次产生的影响是相同 POST 是非幂等的，有副作用的 它会对资源本身产生影响，每次调用都会有新的资源产生，因此不满足幂等性。]]></content>
+      <categories>
+        <category>技术文档</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[Spring使用错误记录]]></title>
     <url>%2F2019%2F03%2F13%2FSpring%E4%BD%BF%E7%94%A8%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95%2F</url>
     <content type="text"><![CDATA[问题: IntelliJ idea 在Spring配置无错误时,装配对象出现 Could not autowire. no beans of “XXX” type found 原因：idea的纠错机制在解析spring通过命名约定的方式进行配置时,支持的并不是太好. 所以该ERROR并不会实际影响到你的程序运行 解决方法：1231. 在Spring XML 配置文件中启用 Bean 的自动扫描功能&lt;context:component-scan base-package=&quot;...&quot;/&gt;2. 在DAO层添加注解@Repository(其将数据访问层的类标识为Spring Bean.同时将所标注的类中抛出的数据访问异常封装为 Spring 的数据访问异常类型)]]></content>
@@ -302,8 +310,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>数组</tag>
         <tag>异或运算</tag>
+        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
