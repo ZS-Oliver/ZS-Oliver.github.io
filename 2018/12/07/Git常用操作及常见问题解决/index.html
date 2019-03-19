@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="ZS-Oliver的个人博客">
 <meta property="og:description" content="与远程仓库建立连接 在远程仓库新建一个项目 生成本地的git管理,在terminal或git里输入 git init 将项目中所有文件添加到仓库中 git add . 添加对本次提交的注释 git commit -m “” (双引号内为对于本次提交的注释内容) 将本地的仓库关联到远程仓库 git remote add origin https://github.com/ZS-Oliver/go.g">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-03T10:22:13.337Z">
+<meta property="og:updated_time" content="2019-03-19T13:36:43.200Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git常用操作及常见问题解决">
 <meta name="twitter:description" content="与远程仓库建立连接 在远程仓库新建一个项目 生成本地的git管理,在terminal或git里输入 git init 将项目中所有文件添加到仓库中 git add . 添加对本次提交的注释 git commit -m “” (双引号内为对于本次提交的注释内容) 将本地的仓库关联到远程仓库 git remote add origin https://github.com/ZS-Oliver/go.g">
@@ -560,6 +560,11 @@
 </li>
 </ul>
 <hr>
+<ul>
+<li>问题：<strong>git提交时报错:Updates were rejected because the tip of your current branch is behind</strong></li>
+<li>解决方法：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git pull origin master</span><br><span class="line"></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
