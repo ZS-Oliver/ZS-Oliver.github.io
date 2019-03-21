@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[236 二叉树的最近公共祖先]]></title>
+    <url>%2F2019%2F03%2F21%2F236%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88%2F</url>
+    <content type="text"><![CDATA[给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。实例1：123输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1输出: 3解释: 节点 5 和节点 1 的最近公共祖先是节点 3。 实例2：123输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4输出: 5解释: 节点 5 和节点 4 的最近公共祖先是节点 5。因为根据定义最近公共祖先节点可以为节点本身。 说明：12所有节点的值都是唯一的。p、q 为不同节点且均存在于给定的二叉树中。 代码实现：123456789101112131415161718192021222324252627282930313233二叉搜索树public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) &#123; TreeNode node = null; if (root == null || p.val &gt; q.val) &#123; return null; &#125; if (root.val &gt;= q.val) &#123; node = getLastCommonNode(root.p, p, q); &#125; if (root.val &lt;= p.val) &#123; node = getLastCommonNode(root.q, p, q); &#125; if (root.val &gt;= p.val &amp;&amp; root.val &lt;= q.val) &#123; return root; &#125; return node; &#125; 非二叉搜索树 public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) &#123; if(root == null || root == p || root == q )&#123; return root; &#125; TreeNode leftNode = lowestCommonAncestor(root.left,p,q); TreeNode rightNode = lowestCommonAncestor(root.right,p,q); if(leftNode != null &amp;&amp; rightNode != null)&#123; return root; &#125; return leftNode == null ? rightNode : leftNode; &#125; 思路：12345对于BST（二叉搜索树是一个排序的二叉树，左子树的结点小于根结点，右子树的结点大于根结点）故找到一个结点，使其大于左子结点小于右子结点即可。对于非BST递归遍历找到所给定的两个结点，然后向上标记，直到有一个结点的左子结点和右子结点都不为空返回即可。]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Get和Post的区别]]></title>
     <url>%2F2019%2F03%2F14%2FGet%E5%92%8CPost%E7%9A%84%E5%8C%BA%E5%88%AB%2F</url>
     <content type="text"><![CDATA[GET和POST有什么区别 对于RESTful规范来说，get用于获取数据,主要用来搜索排序和筛选之类，post用于提交数据，主要用来修改和写入 GET方法是幂等的，所以适合作为查询操作，POST方法是非幂等的，所以用来表示新增操作 POST更安全，不会作为URL的一部分，不会被缓存、保存在服务器日志、以及浏览器记录中 浏览器限制GET的URL长度 POST用于修改何写入数据 GET要快于POST POST请求包含更多的请求头(POST需要在请求的body里包含数据，所以要多了几个数据描述首部字段) POST在真正接收数据之前会先将请求头发送给服务器确认，然后才真正发送数据 POST请求的过程 浏览器请求tcp连接（第一次握手） 服务器答应进行tcp连接（第二次握手） 浏览器确认，并发送post请求头（第三次握手，这个报文较小，所以http会在此时进行第一次数据发送） 服务器返回100 continue响应 浏览器发送数据（body） 服务器返回200 ok响应 get请求的过程 浏览器发送tcp连接（第一次握手） 服务器答应进行tcp连接（第二次握手） 浏览器确认，并发送get请求头和数据（第三次握手） 服务器返回200 ok响应 GET会将数据缓存起来（静态资源），而POST不会 幂等性HTTP方法的幂等性是指一次和多次请求某一个资源应该具有同样的副作用(副作用指当你发送完一个请求以后，网站上的资源状态没有发生修改，即认为这个请求是无副作用的) HTTP的GET/POST/DELETE/PUT方法幂等的情况： GET是幂等的，无副作用的 只查询数据，不会影响到资源的变化 DELETE/PUT 是幂等的，有副作用的 它调用一次和调用多次产生的影响是相同 POST 是非幂等的，有副作用的 它会对资源本身产生影响，每次调用都会有新的资源产生，因此不满足幂等性。]]></content>
@@ -159,8 +170,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>树</tag>
         <tag>DFS</tag>
+        <tag>树</tag>
       </tags>
   </entry>
   <entry>
