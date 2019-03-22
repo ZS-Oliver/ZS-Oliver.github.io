@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[145 二叉树的后序遍历]]></title>
+    <url>%2F2019%2F03%2F22%2F145%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%2F</url>
+    <content type="text"><![CDATA[给定一个二叉树，返回它的 后序 遍历。实例：12345678输入: [1,null,2,3] 1 \ 2 / 3 输出: [3,2,1] 代码实现：123456789101112131415161718192021222324252627282930313233343536373839404142递归实现：public List&lt;Integer&gt; postorderTraversal(TreeNode root) &#123; List&lt;Integer&gt; res = new ArrayList&lt;&gt;(); postOrder2(root, res); retu-rn res; &#125; public void postOrder2(TreeNode root, List&lt;Integer&gt; res) &#123; if (root.left != null) &#123; postOrder2(root.left, res); &#125; if (root.right != null) &#123; postOrder2(root.right, res); &#125; res.add(root.val); &#125;非递归实现： public List&lt;Integer&gt; postorderTraversal(TreeNode root) &#123; List&lt;Integer&gt; result = new ArrayList&lt;&gt;(); Stack&lt;Integer&gt; res = new Stack&lt;&gt;(); Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;(); if (root == null) &#123; return res; &#125; TreeNode node = root; while (node != null || !stack.empty()) &#123; if (node != null) &#123; res.push(node.val); stack.push(node); node = node.right; &#125; else &#123; node = stack.pop(); node = node.left; &#125; &#125; while(!res.empty())&#123; result.add(res.pop()); &#125; return result; &#125;]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[236 二叉树的最近公共祖先]]></title>
     <url>%2F2019%2F03%2F21%2F236%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88%2F</url>
     <content type="text"><![CDATA[给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。实例1：123输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1输出: 3解释: 节点 5 和节点 1 的最近公共祖先是节点 3。 实例2：123输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4输出: 5解释: 节点 5 和节点 4 的最近公共祖先是节点 5。因为根据定义最近公共祖先节点可以为节点本身。 说明：12所有节点的值都是唯一的。p、q 为不同节点且均存在于给定的二叉树中。 代码实现：123456789101112131415161718192021222324252627282930313233二叉搜索树public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) &#123; TreeNode node = null; if (root == null || p.val &gt; q.val) &#123; return null; &#125; if (root.val &gt;= q.val) &#123; node = getLastCommonNode(root.p, p, q); &#125; if (root.val &lt;= p.val) &#123; node = getLastCommonNode(root.q, p, q); &#125; if (root.val &gt;= p.val &amp;&amp; root.val &lt;= q.val) &#123; return root; &#125; return node; &#125; 非二叉搜索树 public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) &#123; if(root == null || root == p || root == q )&#123; return root; &#125; TreeNode leftNode = lowestCommonAncestor(root.left,p,q); TreeNode rightNode = lowestCommonAncestor(root.right,p,q); if(leftNode != null &amp;&amp; rightNode != null)&#123; return root; &#125; return leftNode == null ? rightNode : leftNode; &#125; 思路：12345对于BST（二叉搜索树是一个排序的二叉树，左子树的结点小于根结点，右子树的结点大于根结点）故找到一个结点，使其大于左子结点小于右子结点即可。对于非BST递归遍历找到所给定的两个结点，然后向上标记，直到有一个结点的左子结点和右子结点都不为空返回即可。]]></content>
@@ -252,8 +263,8 @@
       </categories>
       <tags>
         <tag>数组</tag>
-        <tag>字符串</tag>
         <tag>DFS</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
@@ -321,8 +332,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>数组</tag>
         <tag>异或运算</tag>
+        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
