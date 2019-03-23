@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[111 二叉树的最小深度]]></title>
+    <url>%2F2019%2F03%2F23%2F111%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6%2F</url>
+    <content type="text"><![CDATA[给定一个二叉树，找出其最小深度。示例：12345678给定二叉树 [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7返回它的最小深度 2. 代码实现：123456789101112public int minDepth(TreeNode root) &#123; if(root == null)&#123; return 0; &#125; if(root.left == null)&#123; return minDepth(root.right)+1; &#125; if(root.right == null)&#123; return minDepth(root.left) + 1; &#125; return Math.min(minDepth(root.left),minDepth(root.right)) + 1; &#125;]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[145 二叉树的后序遍历]]></title>
     <url>%2F2019%2F03%2F22%2F145%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%2F</url>
     <content type="text"><![CDATA[给定一个二叉树，返回它的 后序 遍历。实例：12345678输入: [1,null,2,3] 1 \ 2 / 3 输出: [3,2,1] 代码实现：123456789101112131415161718192021222324252627282930313233343536373839404142递归实现：public List&lt;Integer&gt; postorderTraversal(TreeNode root) &#123; List&lt;Integer&gt; res = new ArrayList&lt;&gt;(); postOrder2(root, res); retu-rn res; &#125; public void postOrder2(TreeNode root, List&lt;Integer&gt; res) &#123; if (root.left != null) &#123; postOrder2(root.left, res); &#125; if (root.right != null) &#123; postOrder2(root.right, res); &#125; res.add(root.val); &#125;非递归实现： public List&lt;Integer&gt; postorderTraversal(TreeNode root) &#123; List&lt;Integer&gt; result = new ArrayList&lt;&gt;(); Stack&lt;Integer&gt; res = new Stack&lt;&gt;(); Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;(); if (root == null) &#123; return res; &#125; TreeNode node = root; while (node != null || !stack.empty()) &#123; if (node != null) &#123; res.push(node.val); stack.push(node); node = node.right; &#125; else &#123; node = stack.pop(); node = node.left; &#125; &#125; while(!res.empty())&#123; result.add(res.pop()); &#125; return result; &#125;]]></content>
@@ -263,8 +274,8 @@
       </categories>
       <tags>
         <tag>数组</tag>
-        <tag>DFS</tag>
         <tag>字符串</tag>
+        <tag>DFS</tag>
       </tags>
   </entry>
   <entry>
@@ -332,8 +343,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>异或运算</tag>
         <tag>数组</tag>
+        <tag>异或运算</tag>
       </tags>
   </entry>
   <entry>
